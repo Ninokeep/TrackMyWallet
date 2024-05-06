@@ -1,0 +1,41 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+}
+
+model Expenditure {
+  id        Int      @id @default(autoincrement())
+  name     String
+  price     Float    @default(0.0)
+  published Boolean  @default(false)
+  userId    Int      @map("user_id")
+  user      User     @relation(fields: [userId], references: [id])
+  createAt  DateTime @default(now()) @map("create_at")
+  updateAt  DateTime @default(now()) @map("update_at")
+
+  @@map("expenditures")
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  name         String
+  expenditures Expenditure[]
+  password     String
+  email        String        @unique
+  role         Role          @default(user)
+  createAt     DateTime      @default(now()) @map("create_at")
+  updateAt     DateTime      @default(now()) @map("update_at")
+  disabled     Boolean       @default(false)
+
+  @@map("users")
+}
