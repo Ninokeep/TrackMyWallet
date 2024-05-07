@@ -34,8 +34,8 @@ const isError  = computed(() => Object.keys(form.errors.value).length > 0  ? tru
 </script>
 
 <template>
-  <form @submit="onSubmit" class="flex mt-8 flex-col mx-[35em]">
-    <FormField v-slot="{ componentField }" name="name">
+  <form @submit="onSubmit" class="flex mt-8 flex-col ">
+    <FormField v-slot="{ componentField }" name="name" >
       <FormItem>
         <FormLabel>Name</FormLabel>
         <FormControl>
@@ -50,10 +50,10 @@ const isError  = computed(() => Object.keys(form.errors.value).length > 0  ? tru
       </FormItem>
     </FormField>
 
-    <FormField v-slot="{ componentField }" name="price">
+    <FormField v-slot="{ componentField }" name="price" >
       <FormItem>
         <FormLabel>Price</FormLabel>
-        <FormControl>
+        <FormControl class="w-[10em]">
           <Input
             placeholder="10.0"
             v-bind="componentField"
