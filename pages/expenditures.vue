@@ -2,12 +2,21 @@
 import type { Ref } from "vue";
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import { useToast } from '@/components/ui/toast/use-toast'
+import { useExpenditureStore } from '@/stores/expenditure'
+import { onMounted } from "vue";
 
 const name = ref("");
 const price = ref(0);
 const errorSubmit = ref(false);
 
 const { toast } = useToast()
+
+const expenditureStore  = useExpenditureStore();
+
+onMounted(async () => {
+  await expenditureStore.loadExpenditures();
+
+})
 
 async function updateFormValue(value: {
   name: Ref<string>;
@@ -37,6 +46,8 @@ async function updateFormValue(value: {
     });
   }
 }
+
+
 </script>
 
 <template>

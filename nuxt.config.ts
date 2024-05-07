@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-  modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@vee-validate/nuxt"],
+  modules: ["@pinia/nuxt","@nuxtjs/tailwindcss", "shadcn-nuxt", "@vee-validate/nuxt"],
   imports: {
     dirs: [
       "types/*.ts",
-      "store/*.ts",
+      "stores/*.ts",
       "types/**/*.ts",
       "types/*.*.ts",
       "types/**/*.*.ts",
