@@ -47,16 +47,6 @@ async function updateFormValue(value: {
   }
 }
 
-const data = [
-  { name: 'Jan', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'Feb', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'Mar', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'Apr', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'May', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-  { name: 'Jun', total: Math.floor(Math.random() * 2000) + 500, predicted: Math.floor(Math.random() * 2000) + 500 },
-]
-
-const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}` : ''
 </script>
 
 <template>
@@ -75,12 +65,7 @@ const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${
        />
      </div>
      <div class="flex-none flex justify-start items-center">
-       <DonutChart
-           index="name"
-           :category="'total'"
-           :data="data"
-           :value-formatter="valueFormatter"
-       />
+       <SpendDonut />
      </div>
     </div>
 

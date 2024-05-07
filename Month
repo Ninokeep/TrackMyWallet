@@ -1,0 +1,12 @@
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": PostgreSQL database "howmuchspend", schema "public" at "localhost:5432"
+
+
+⚠️  Warnings for the current datasource:
+
+  • You are about to drop the `expenditures` table, which is not empty (7 rows).
+  • You are about to drop the `users` table, which is not empty (1 rows).
+
+[?25l[2K[1G[36m?[39m [1mAre you sure you want to create and apply this migration?[22m [90m›[39m [90m(y/N)[39m[2K[1G[2K[1G[32m✔[39m [1mAre you sure you want to create and apply this migration?[22m [90m…[39m no
+[?25hMigration cancelled.

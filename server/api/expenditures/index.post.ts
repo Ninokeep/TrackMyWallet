@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { PrismaClient, Prisma } from '@prisma/client'
+import moment from "moment";
 
 const dataSchema = z.object({
   name: z.string().min(1),
@@ -11,6 +12,7 @@ export default defineEventHandler(async (event) => {
   const result = await readValidatedBody(event, (body) =>
     dataSchema.safeParse(body)
   );
+
   if (!result.success) {
     throw createError({
       statusCode: 400,
@@ -34,9 +36,11 @@ export default defineEventHandler(async (event) => {
     data: {
       name: result.data.name,
       userId: result.data.userId,
-      price: result.data.price
+      price: result.data.price,
+      createAt: moment().format("MMMM").toLowerCase() as never
     }
   });
+
   if(!expenditure){
     throw createError({
       statusCode: 400,

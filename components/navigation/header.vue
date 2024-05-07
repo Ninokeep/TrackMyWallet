@@ -1,34 +1,27 @@
 <script setup lang="ts">
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+import { routing } from "~/router/router";
+
+const route = useRoute();
+
+const btnHeaderIsActive = (data:string) =>  computed(() => route.path === data);
+
 </script>
 
 <template>
   <div class="flex p-4 justify-end">
     <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem>
+        <NavigationMenuItem v-for="item in routing">
           <NavigationMenuLink
-            href="/expenditures"
-            :class="navigationMenuTriggerStyle()"
+            :href="item.href"
+            :class="[
+            item.fn(), btnHeaderIsActive(item.href).value  ?
+            'flex justify-start  opacity-100 text-white bg-gray-800 hover:bg-gray-800 hover:text-white'
+            : 'flex justify-start opacity-75 hover:opacity-100 hover:text-white hover:bg-gray-800'
+            ]"
           >
-            Home
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuLink
-            href="/list-expenditures"
-            :class="navigationMenuTriggerStyle()"
-          >
-            List expenditures
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink
-            href="/login"
-            :class="navigationMenuTriggerStyle()"
-          >
-            Login
+            {{ item.name }}
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
