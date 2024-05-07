@@ -5,14 +5,25 @@ const dataSchema   = z.object({
 })
 
 export default defineEventHandler( async (event) => {
-    const {userId} = await getValidatedRouterParams<{ userId: number  }>(event, body => {
+    const data = await getValidatedRouterParams<{ userId: number  }>(event, body => {
         dataSchema.safeParse(body)
     })
+
+    if(isNaN(data.userId)){
+        throw createError({
+            statusCode: 400,
+            message:  "The param must be an integer"
+        })
+    }
     const prisma = new PrismaClient();
 
     const expenditure = await prisma.expenditure.findMany({
         where: {
-            userId: 1
+            userId: +data.userId
+        },
+        take: 5,
+        orderBy: {
+            createAt: "desc"
         }
     })
 

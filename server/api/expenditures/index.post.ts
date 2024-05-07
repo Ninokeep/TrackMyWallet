@@ -11,7 +11,6 @@ export default defineEventHandler(async (event) => {
   const result = await readValidatedBody(event, (body) =>
     dataSchema.safeParse(body)
   );
-
   if (!result.success) {
     throw createError({
       statusCode: 400,

@@ -4,19 +4,18 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { useExpenditureStore } from '@/stores/expenditure'
 import { onMounted } from "vue";
+import type {Expenditure} from "~/utils/interfaces/Expenditure";
 
 const name = ref("");
 const price = ref(0);
 const errorSubmit = ref(false);
+const expenditures = ref<Expenditure[]>([] as Expenditure[]);
 
 const { toast } = useToast()
 
 const expenditureStore  = useExpenditureStore();
 
-onMounted(async () => {
-  await expenditureStore.loadExpenditures();
-
-})
+expenditures.value = await expenditureStore.loadExpendituresByDesc();
 
 async function updateFormValue(value: {
   name: Ref<string>;
@@ -67,7 +66,7 @@ async function updateFormValue(value: {
 
     <div class="mt-40">
       <h1 class="mx-64 text-xl font-bold mb-2"> Spend of the month</h1>
-      <SpendSpenditures />
+      <SpendSpenditures :expenditures="expenditures"/>
     </div>
   </div>
 </template>

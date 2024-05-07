@@ -1,18 +1,21 @@
 <script setup lang="ts">
+import type {Expenditure} from "~/utils/interfaces/Expenditure";
+import moment from "moment/moment";
 
+const props = defineProps<Expenditure>()
 </script>
 
 <template>
-  <Card >
+  <Card :key="props.id">
     <CardHeader>
       <CardTitle>Expenditure</CardTitle>
-      <CardDescription>Pop corn</CardDescription>
+      <CardDescription>{{props.name}}</CardDescription>
     </CardHeader>
     <CardContent>
-      30 $
+      {{`${props.price} $`}}
     </CardContent>
     <CardFooter>
-      The 10 April 2024
+      {{moment(props.createAt).format("DD/MM/YYYY")}}
     </CardFooter>
   </Card>
 </template>
