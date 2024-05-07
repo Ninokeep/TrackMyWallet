@@ -69,7 +69,14 @@ pnpm run preview
 yarn preview
 
 # bun
+
+
 bun run preview
 ```
+
+# Screenshot
+![localhost_3000_expenditures](https://github.com/Ninokeep/TrackMyWallet/assets/121240813/5ac05da5-27a1-445c-bf40-19048f4fbf31)
+
+
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
