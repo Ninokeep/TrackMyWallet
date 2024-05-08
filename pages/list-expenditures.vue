@@ -2,11 +2,8 @@
 import { ref, onMounted } from 'vue'
 import type { Expenditure } from "~/utils/interfaces/Expenditure";
 import { columns } from "~/components/spend/column";
-import moment from 'moment';
 
 const data = ref<Expenditure[]>([])
-
-
 
 async function getData(): Promise<Expenditure[]> {
 

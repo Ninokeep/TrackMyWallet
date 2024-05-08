@@ -15,7 +15,7 @@ const props = defineProps<Expenditure>()
       {{`Price : ${props.price} $`}}
     </CardContent>
     <CardFooter >
-      Month : {{props.createAt}}
+      {{`The ${moment(props.createAt).format("DD-MM-YYYY hh:mm")}`}}
     </CardFooter>
   </Card>
 </template>

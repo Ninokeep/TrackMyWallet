@@ -21,7 +21,6 @@ export const useExpenditureStore = defineStore('expenditure', () => {
 
     async function loadExpendituresByDesc(): Promise<Expenditure[]> {
         const { datas } = await $fetch<{datas: Expenditure[]}>(`http://localhost:3000/api/expenditures/date-desc/${userId}`);
-
         return datas;
     }
     return { loadExpendituresByDesc, expenditures, setExpenditures, loadExpenditures, getExpenditures };

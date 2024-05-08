@@ -20,7 +20,7 @@ model Expenditure {
   published Boolean  @default(false)
   userId    Int      @map("user_id")
   user      User     @relation(fields: [userId], references: [id])
-  createAt  Month    @map("create_at")
+  createAt  DateTime @default(now())    @map("create_at")
   updateAt  DateTime @default(now()) @map("update_at")
 
   @@map("expenditures")
@@ -38,19 +38,4 @@ model User {
   disabled     Boolean       @default(false)
 
   @@map("users")
-}
-
-enum  Month {
-  september
-  october
-  november
-  december
-  january
-  february
-  march
-  april
-  may
-  june
-  july
-  august
 }

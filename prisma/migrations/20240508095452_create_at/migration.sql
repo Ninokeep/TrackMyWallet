@@ -1,9 +1,6 @@
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('user', 'admin');
 
--- CreateEnum
-CREATE TYPE "Month" AS ENUM ('september', 'october', 'november', 'december', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august');
-
 -- CreateTable
 CREATE TABLE "expenditures" (
     "id" SERIAL NOT NULL,
@@ -11,7 +8,7 @@ CREATE TABLE "expenditures" (
     "price" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
     "published" BOOLEAN NOT NULL DEFAULT false,
     "user_id" INTEGER NOT NULL,
-    "create_at" "Month" NOT NULL,
+    "create_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "update_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "expenditures_pkey" PRIMARY KEY ("id")

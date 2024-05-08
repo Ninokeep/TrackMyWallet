@@ -37,7 +37,6 @@ export default defineEventHandler(async (event) => {
       name: result.data.name,
       userId: result.data.userId,
       price: result.data.price,
-      createAt: moment().format("MMMM").toLowerCase() as never
     }
   });
 

@@ -6,7 +6,6 @@ const props = defineProps<{
   expenditures: Ref<Expenditure[]>
 }>();
 
-
 </script>
 
 <template>
