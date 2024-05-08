@@ -1,6 +1,9 @@
 import { h } from 'vue'
 import type { Expenditure } from "~/utils/interfaces/Expenditure";
 import type { ColumnDef } from "@tanstack/vue-table";
+import moment from 'moment';
+import { ArrowUpDown, ChevronDown } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
 
 export const columns: ColumnDef<Expenditure>[] = [
     {
@@ -13,15 +16,24 @@ export const columns: ColumnDef<Expenditure>[] = [
     },
     {
         accessorKey: 'name',
-        header: () => h('div', { class: 'text-right' }, 'Name'),
+        header: ({column}) => h(Button
+            ,
+            {
+                variant: "ghost",
+                onClick: () => column.toggleSorting(column.getIsSorted() === "asc")
+            },
+            () => ["Name", h(ArrowUpDown, { class: 'ml-2 h-4 w-4' })]
+        ),
         cell: ({ row }) => {
 
-            return h('div', { class: 'text-right font-medium' }, row.getValue("name"))
-        },
+            return h('div', { class: 'font-medium' }, row.getValue("name"))
+        }
     },
     {
         accessorKey: 'price',
-        header: () => h('div', { class: 'text-right' }, 'Price'),
+        header: ({column}) => h(Button, { variant: "ghost",
+            onClick: () => column.toggleSorting(column.getIsSorted() === "asc")
+        }, () => ["Price", h(ArrowUpDown, { class: 'ml-2 h-4 w-4' })]),
         cell: ({ row }) => {
             const amount = Number.parseFloat(row.getValue('price'))
             const formatted = new Intl.NumberFormat('en-US', {
@@ -34,10 +46,11 @@ export const columns: ColumnDef<Expenditure>[] = [
     },
     {
         accessorKey: 'createAt',
-        header: () => h('div', { class: 'text-right' }, 'Create At'),
+        header: ({column}) => h(Button, { variant: "ghost",onClick: () => column.toggleSorting(column.getIsSorted() === "asc") },
+            () => ["Create At", h(ArrowUpDown, { class: 'ml-2 h-4 w-4' })]),
         cell: ({ row }) => {
 
-            return h('div', { class: 'text-right font-medium' }, row.getValue("createAt"))
+            return h('div', { class: 'text-right font-medium' }, moment(row.getValue("createAt")).format('YYYY-MM-DD hh:mm'))
         }
     }
 ]
