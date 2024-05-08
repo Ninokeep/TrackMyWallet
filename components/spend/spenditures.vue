@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type {Expenditure} from "~/utils/interfaces/Expenditure";
+import type { Ref } from 'vue';
 
 const props = defineProps<{
-  expenditures: Expenditure[]
+  expenditures: Ref<Expenditure[]>
 }>();
 
-const { datas } = toRefs(props.expenditures)
 
 </script>
 
@@ -18,7 +18,7 @@ const { datas } = toRefs(props.expenditures)
   >
     <CarouselContent>
       <CarouselItem
-        v-for="(value, index) in datas"
+        v-for="(value, index) in props.expenditures"
         :key="index"
         class="md:basis-1/2 lg:basis-1/3"
       >

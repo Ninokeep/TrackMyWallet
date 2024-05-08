@@ -6,16 +6,11 @@ import moment from 'moment';
 
 const data = ref<Expenditure[]>([])
 
+
+
 async function getData(): Promise<Expenditure[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: 1,
-      price: 100,
-      createAt: moment(new Date()).format("DD/MM/YYYY"),
-      name: "testing"
-    },
-  ]
+
+  return await $fetch<Expenditure[]>("http://localhost:3000/api/expenditures");
 }
 
 onMounted(async () => {

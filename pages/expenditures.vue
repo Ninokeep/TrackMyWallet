@@ -4,20 +4,22 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { useExpenditureStore } from '@/stores/expenditure'
 import type {Expenditure} from "~/utils/interfaces/Expenditure";
-import moment from "moment";
-import { DonutChart } from '@/components/ui/chart-donut'
 
 const name = ref("");
 const price = ref(0);
 const errorSubmit = ref(false);
-const expenditures = ref<Expenditure[]>([] as Expenditure[]);
+const expendituresLimitByDate = ref<Expenditure[]>([]);
+
+const expenditures = ref<{datas: Expenditure[]}>({datas: [] as Expenditure[]});
 
 const { toast } = useToast()
 
 const expenditureStore  = useExpenditureStore();
 
-expenditures.value = await expenditureStore.loadExpendituresByDesc();
-
+onMounted(async () => {
+  expendituresLimitByDate.value = await expenditureStore.loadExpendituresByDesc();
+  console.log(expendituresLimitByDate);
+})
 async function updateFormValue(value: {
   name: Ref<string>;
   price: Ref<number>;
@@ -44,7 +46,10 @@ async function updateFormValue(value: {
       title: 'Expenditure added',
       description: 'You are added an expenditure',
     });
+
+    expendituresLimitByDate.value = await expenditureStore.loadExpendituresByDesc();
   }
+
 }
 
 </script>
@@ -71,7 +76,9 @@ async function updateFormValue(value: {
 
     <div class="mt-40">
       <h1 class="mx-64 text-xl font-bold mb-2"> Spend of the month</h1>
-      <SpendSpenditures :expenditures="expenditures"/>
+
+      <SpendSpenditures :expenditures="expendituresLimitByDate" v-if="expendituresLimitByDate.length > 0"/>
+      <p class="text-gray-500 text-center" v-else> Not expenditures ...</p>
     </div>
   </div>
 </template>

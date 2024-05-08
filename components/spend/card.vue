@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {Expenditure} from "~/utils/interfaces/Expenditure";
+import type { Expenditure } from "~/utils/interfaces/Expenditure";
 import moment from "moment/moment";
 
 const props = defineProps<Expenditure>()
@@ -9,13 +9,13 @@ const props = defineProps<Expenditure>()
   <Card :key="props.id">
     <CardHeader>
       <CardTitle>Expenditure</CardTitle>
-      <CardDescription>{{props.name}}</CardDescription>
+      <CardDescription>Article bought : {{props.name}}</CardDescription>
     </CardHeader>
     <CardContent>
-      {{`${props.price} $`}}
+      {{`Price : ${props.price} $`}}
     </CardContent>
-    <CardFooter>
-      {{moment(props.createAt).format("DD/MM/YYYY")}}
+    <CardFooter >
+      Month : {{props.createAt}}
     </CardFooter>
   </Card>
 </template>
