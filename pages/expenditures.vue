@@ -4,13 +4,14 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { useExpenditureStore } from '@/stores/expenditure'
 import type {Expenditure} from "~/utils/interfaces/Expenditure";
+import {show} from "@unovis/ts/components/tooltip/style";
 
 const name = ref("");
 const price = ref(0);
 const errorSubmit = ref(false);
 const expendituresLimitByDate = ref<Expenditure[]>([]);
-
 const expenditures = ref<{datas: Expenditure[]}>({datas: [] as Expenditure[]});
+const showDonutSkeleton = ref(false);
 
 const { toast } = useToast()
 
@@ -18,7 +19,6 @@ const expenditureStore  = useExpenditureStore();
 
 onMounted(async () => {
   expendituresLimitByDate.value = await expenditureStore.loadExpendituresByDesc();
-  console.log(expendituresLimitByDate);
 })
 async function updateFormValue(value: {
   name: Ref<string>;
@@ -52,6 +52,10 @@ async function updateFormValue(value: {
 
 }
 
+function setSkeletonDonut(value: boolean){
+  showDonutSkeleton.value = value;
+  console.log("event")
+}
 </script>
 
 <template>
@@ -69,7 +73,8 @@ async function updateFormValue(value: {
            @submit:form="(e) => updateFormValue(e)"
        />
      </div>
-     <div class="flex-none flex justify-start items-center">
+     <div class="flex-none flex  flex-col items-center justify-start">
+       <h1 class="text-2xl font-bold pb-8">General Expenditures</h1>
        <SpendDonut />
      </div>
     </div>

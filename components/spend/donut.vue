@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import {DonutChart} from "~/components/ui/chart-donut";
+import { DonutChart } from "~/components/ui/chart-donut";
+import { onMounted, onDeactivated } from "vue";
+
+const componentIsMounted = ref(false);
+
+const emits = defineEmits<{
+  (e: 'mounted', value: boolean) : void
+}>();
 
 
 const data = [
@@ -12,6 +19,12 @@ const data = [
 ]
 
 const valueFormatter = (tick: number | Date) => typeof tick === 'number' ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}` : ''
+
+onMounted(() => {
+
+  emits("mounted", true);
+})
+
 </script>
 
 <template>
