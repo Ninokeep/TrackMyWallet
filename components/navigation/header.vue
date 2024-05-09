@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { routing } from "~/router/router";
 
 const route = useRoute();

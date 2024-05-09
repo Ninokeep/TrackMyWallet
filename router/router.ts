@@ -11,9 +11,4 @@ export const routing: Routing[] = [
         href: "/list-expenditures",
         fn: () => navigationMenuTriggerStyle(),
     },
-    {
-        name: "Login",
-        href: "/login",
-        fn: () => navigationMenuTriggerStyle(),
-    },
 ]
