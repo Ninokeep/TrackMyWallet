@@ -16,7 +16,7 @@ const errorSubmit = ref(props.errorSubmit);
 
 const formSchema = toTypedSchema(
   z.object({
-    name: z.string(),
+    name: z.string().trim().min(1),
     price: z.number().positive(),
   })
 );

@@ -1,9 +1,8 @@
 import { z } from "zod";
-import { PrismaClient, Prisma } from '@prisma/client'
-import moment from "moment";
+import { PrismaClient } from '@prisma/client'
 
 const dataSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().trim().min(1),
   userId: z.number().positive(),
   price: z.number().positive()
 });

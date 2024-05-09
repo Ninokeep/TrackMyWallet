@@ -2,7 +2,7 @@ import { h } from 'vue'
 import type { Expenditure } from "~/utils/interfaces/Expenditure";
 import type { ColumnDef } from "@tanstack/vue-table";
 import moment from 'moment';
-import { ArrowUpDown, ChevronDown } from 'lucide-vue-next'
+import { ArrowUpDown } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 
 export const columns: ColumnDef<Expenditure>[] = [
