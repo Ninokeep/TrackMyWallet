@@ -10,18 +10,23 @@ export default defineEventHandler(async (event) => {
   const result = await getValidatedQuery(event, (body) => {
     return dataSchema.safeParse(body);
   });
+
   if (!result.success) {
     throw createError({
       statusCode: 400,
       statusMessage: "The query take must be an integer",
     });
   }
+
   const prisma = new PrismaClient();
 
   const [data, totalExpenditures] = await prisma.$transaction([
     prisma.expenditure.findMany({
       take: 10,
       skip: skip(result.data.p, 10),
+      orderBy: {
+        createAt: "desc",
+      },
     }),
     prisma.expenditure.count(),
   ]);
