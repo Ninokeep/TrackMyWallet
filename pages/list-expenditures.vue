@@ -14,7 +14,6 @@ async function getData(): Promise<ResponseApi<Expenditure>> {
 
 onMounted(async () => {
   data.value = (await getData()).items;
-  console.log(data.value);
 });
 </script>
 
