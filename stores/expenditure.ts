@@ -1,8 +1,10 @@
-import type { Expenditure } from "~/utils/interfaces/Expenditure";
 import type { SumType } from "~/utils/types/sum-type";
+import type { Expenditure } from "@/utils/interfaces/Expenditure";
+import type { ResponseApi } from "@/utils/interfaces/response-api";
+import { useFetch } from "@vueuse/core";
 
 export const useExpenditureStore = defineStore("expenditure", () => {
-  const expenditures = ref<Expenditure>([]);
+  const expenditures = ref<ResponseApi<Expenditure>>(null);
   const userId = "1";
   const sumExpenditures = ref<SumType[]>([]);
 
@@ -25,13 +27,14 @@ export const useExpenditureStore = defineStore("expenditure", () => {
     sumExpenditures.value = data;
   }
 
-  async function loadExpenditures() {
-    const data = await $fetch(
-      `http://localhost:3000/api/expenditures/date-desc/${userId}`
+  async function loadExpenditures(queryParam?: number) {
+    const { data, status, error, refresh, clear } = await useAsyncData(
+      "expendituresLoad",
+      () =>
+        $fetch(`http://localhost:3000/api/expenditures?p=${queryParam ?? 1}`)
     );
-
     if (data) {
-      setExpenditures(data.datas);
+      setExpenditures(data.value);
     }
   }
 

@@ -1,24 +1,22 @@
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import type { Expenditure } from "@/utils/interfaces/Expenditure";
-import type { ResponseApi } from "@/utils/interfaces/response-api";
+import { onMounted, onBeforeMount } from "vue";
 import { columns } from "@/components/spend/column";
 
-const data = ref<Expenditure[]>([]);
+const expenditureStore = useExpenditureStore();
+const data = ref(null);
+await expenditureStore.loadExpenditures();
 
-async function getData(): Promise<ResponseApi<Expenditure>> {
-  return await $fetch<ResponseApi<Expenditure>>(
-    "http://localhost:3000/api/expenditures"
-  );
+async function loadPagination(index: number) {
+  await expenditureStore.loadExpenditures(index);
 }
-
-onMounted(async () => {
-  data.value = (await getData()).items;
-});
 </script>
 
 <template>
   <div class="container py-10 mx-auto">
-    <SpendDataTable :columns="columns" :data="data" />
+    <SpendDataTable
+      :columns="columns"
+      :data="expenditureStore.getExpenditures"
+      @load-pagination="(e) => loadPagination(e)"
+    />
   </div>
 </template>

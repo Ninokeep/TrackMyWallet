@@ -2,7 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-  modules: ["@pinia/nuxt","@nuxtjs/tailwindcss", "shadcn-nuxt", "@vee-validate/nuxt"],
+  modules: [
+    "@pinia/nuxt",
+    "@nuxtjs/tailwindcss",
+    "shadcn-nuxt",
+    "@vee-validate/nuxt",
+  ],
   imports: {
     dirs: [
       "types/*.ts",
@@ -10,6 +15,7 @@ export default defineNuxtConfig({
       "types/**/*.ts",
       "types/*.*.ts",
       "types/**/*.*.ts",
+      "composables/*/*.ts",
     ],
   },
   veeValidate: {

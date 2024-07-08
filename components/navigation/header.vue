@@ -3,8 +3,10 @@ import { routing } from "~/router/router";
 
 const route = useRoute();
 
-const btnHeaderIsActive = (data:string) =>  computed(() => route.path === data);
-
+const btnHeaderIsActive = (data: string) =>
+  computed(() => {
+    return route.path === data;
+  });
 </script>
 
 <template>
@@ -12,16 +14,18 @@ const btnHeaderIsActive = (data:string) =>  computed(() => route.path === data);
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem v-for="item in routing">
-          <NavigationMenuLink
-            :href="item.href"
+          <NuxtLink
+            :to="item.href"
             :class="[
-            item.fn(), btnHeaderIsActive(item.href).value  ?
-            'flex justify-start  opacity-100 text-white bg-gray-800 hover:bg-gray-800 hover:text-white'
-            : 'flex justify-start opacity-75 hover:opacity-100 hover:text-white hover:bg-gray-800'
+              btnHeaderIsActive(item.href).value
+                ? 'flex justify-start  opacity-100 text-white bg-gray-800  transition p-2 rounded-md '
+                : 'flex justify-start opacity-75 hover:opacity-100  hover:text-white hover:bg-gray-800 transition p-2 rounded-md',
             ]"
           >
-            {{ item.name }}
-          </NavigationMenuLink>
+            <NavigationMenuLink :href="item.href">
+              {{ item.name }}
+            </NavigationMenuLink>
+          </NuxtLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
