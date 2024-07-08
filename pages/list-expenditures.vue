@@ -4,6 +4,7 @@ import { columns } from "@/components/spend/column";
 
 const expenditureStore = useExpenditureStore();
 const data = ref(null);
+
 await expenditureStore.loadExpenditures();
 
 async function loadPagination(index: number) {

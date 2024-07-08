@@ -28,13 +28,22 @@ export const useExpenditureStore = defineStore("expenditure", () => {
   }
 
   async function loadExpenditures(queryParam?: number) {
-    const { data, status, error, refresh, clear } = await useAsyncData(
-      "expendituresLoad",
-      () =>
-        $fetch(`http://localhost:3000/api/expenditures?p=${queryParam ?? 1}`)
-    );
-    if (data) {
-      setExpenditures(data.value);
+    // const { data, status, error, refresh, clear } = await useAsyncData(
+    //   "expendituresLoad",
+    //   () =>
+    //     $fetch(`http://localhost:3000/api/expenditures?p=${queryParam ?? 1}`)
+    // );
+    // if (data) {
+    //   setExpenditures(data.value);
+    // }
+
+    try {
+      const data = await $fetch(
+        `http://localhost:3000/api/expenditures?p=${queryParam ?? 1}`
+      );
+      setExpenditures(data);
+    } catch (e) {
+      throw new Error();
     }
   }
 
